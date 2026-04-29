@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idris Haji Bright | Cybersecurity Specialist & Full-Stack Developer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        orbitron: ['Orbitron', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        cyber: {
+                            bg: '#f8fafc',
+                            surface: '#ffffff',
+                            panel: '#f1f5f9',
+                            border: '#e2e8f0',
+                            accent: '#059669',
+                            accent2: '#0891b2',
+                            accent3: '#dc2626',
+                            text: '#0f172a',
+                            muted: '#64748b',
+                            dark: '#1e293b'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'glow': 'glow 2s ease-in-out infinite alternate',
+                        'slide-up': 'slideUp 0.6s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        glow: {
+                            '0%': { boxShadow: '0 0 5px #059669, 0 0 10px #059669' },
+                            '100%': { boxShadow: '0 0 20px #059669, 0 0 30px #059669' },
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .cyber-grid {
+            background-image: 
+                linear-gradient(rgba(5, 150, 105, 0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(5, 150, 105, 0.04) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+        }
+
+        .skill-tag {
+            transition: all 0.3s ease;
+        }
+        .skill-tag:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.15);
+        }
+
+        .project-card {
+            transition: all 0.4s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(5, 150, 105, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #059669;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #059669;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.7), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1rem;
+        }
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.06;
+        }
+
+        .content-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-input:focus {
+            border-color: #059669;
+            box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+        }
+
+        .form-status {
+            display: none;
+        }
+        .form-status.show {
+            display: block;
+            animation: slideUp 0.4s ease;
+        }
+    </style>
+</head>
+<body class="cyber-grid">
+    <canvas id="matrix-canvas"></canvas>
+
+    <div class="content-wrapper">
+        <!-- Navigation -->
+        <nav class="fixed top-0 w-full z-50 glass-panel border-b border-cyber-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-16">
+                    <div class="flex items-center space-x-2">
+                        <i class="fas fa-shield-halved text-cyber-accent text-2xl"></i>
+                        <span class="font-orbitron font-bold text-xl text-cyber-text tracking-wider">IHB<span class="text-cyber-accent">.</span></span>
+                    </div>
+                    <div class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">Home</a>
+                        <a href="#about" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">About</a>
+                        <a href="#skills" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">Skills</a>
+                        <a href="#projects" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">Projects</a>
+                        <a href="#gallery" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">Gallery</a>
+                        <a href="#contact" class="nav-link text-sm font-medium text-cyber-muted hover:text-cyber-accent transition-colors">Contact</a>
+                    </div>
+                    <button id="mobile-menu-btn" class="md:hidden text-cyber-muted hover:text-cyber-accent">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden glass-panel border-t border-cyber-border">
+                <div class="px-4 py-4 space-y-3">
+                    <a href="#home" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">Home</a>
+                    <a href="#about" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">About</a>
+                    <a href="#skills" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">Skills</a>
+                    <a href="#projects" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">Projects</a>
+                    <a href="#gallery" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">Gallery</a>
+                    <a href="#contact" class="block text-sm font-medium text-cyber-muted hover:text-cyber-accent">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section id="home" class="min-h-screen flex items-center justify-center pt-16 relative">
+            <div class="absolute inset-0 bg-gradient-to-b from-cyber-accent/5 via-transparent to-transparent"></div>
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+                <div class="mb-8 animate-float">
+                    <div class="w-40 h-40 mx-auto rounded-full border-2 border-cyber-accent/20 p-1 relative bg-white shadow-lg">
+                        <div class="w-full h-full rounded-full bg-gradient-to-br from-cyber-panel to-white flex items-center justify-center overflow-hidden">
+                            <i class="fas fa-user-secret text-6xl text-cyber-accent/40"></i>
+                        </div>
+                        <div class="absolute -bottom-2 -right-2 w-10 h-10 bg-cyber-accent rounded-full flex items-center justify-center animate-pulse-slow shadow-md">
+                            <i class="fas fa-check text-white text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <h1 class="font-orbitron text-4xl md:text-6xl lg:text-7xl font-bold text-cyber-text mb-4 tracking-tight">
+                    IDRIS HAJI <span class="text-cyber-accent">BRIGHT</span>
+                </h1>
+
+                <div class="h-8 mb-8">
+                    <p id="typing-text" class="text-lg md:text-xl text-cyber-accent font-mono typing-cursor"></p>
+                </div>
+
+                <p class="text-cyber-muted text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+                    Protecting digital assets, solving complex security challenges, and building innovative solutions that combine strong security practices with modern software development.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#projects" class="px-8 py-3 bg-cyber-accent text-white font-bold rounded-lg hover:bg-emerald-700 transition-all hover:shadow-lg flex items-center justify-center gap-2">
+                        <i class="fas fa-rocket"></i> View Projects
+                    </a>
+                    <a href="#contact" class="px-8 py-3 border-2 border-cyber-accent text-cyber-accent font-bold rounded-lg hover:bg-cyber-accent/5 transition-all flex items-center justify-center gap-2">
+                        <i class="fas fa-envelope"></i> Get In Touch
+                    </a>
+                </div>
+
+                <div class="mt-16 flex justify-center gap-6">
+                    <a href="https://github.com/Uchbiojo" class="w-12 h-12 rounded-lg glass-panel flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent/40 transition-all">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/idris-bright-15b961406" class="w-12 h-12 rounded-lg glass-panel flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent/40 transition-all">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                    <a href="https://twitter.com/@IdrisBrigh27710" class="w-12 h-12 rounded-lg glass-panel flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent/40 transition-all">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 rounded-lg glass-panel flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent/40 transition-all">
+                        <i class="fas fa-globe text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-cyber-accent/30"></div>
+                        <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-cyber-text">ABOUT <span class="text-cyber-accent">ME</span></h2>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-cyber-accent/30"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div class="space-y-6">
+                            <div class="glass-panel rounded-2xl p-8 border-l-4 border-cyber-accent">
+                                <h3 class="text-2xl font-bold text-cyber-text mb-4 font-orbitron">Who Am I?</h3>
+                                <p class="text-cyber-muted leading-relaxed mb-4">
+                                    I am Idris Haji Bright, a dedicated Cybersecurity Specialist with over <span class="text-cyber-accent font-semibold">3 years</span> of hands-on experience in cybersecurity, penetration testing, and ethical hacking. I specialize in identifying security vulnerabilities, strengthening system defenses, and developing secure, scalable web solutions.
+                                </p>
+                                <p class="text-cyber-muted leading-relaxed">
+                                    With a strong technical background in both cybersecurity and software development, I combine offensive security skills with development expertise to build secure and efficient digital systems. My experience includes vulnerability assessment, penetration testing, network security analysis, and secure application development.
+                                </p>
+                            </div>
+
+                            <div class="glass-panel rounded-2xl p-8 border-l-4 border-cyber-accent2">
+                                <h3 class="text-xl font-bold text-cyber-text mb-3 font-orbitron flex items-center gap-2">
+                                    <i class="fas fa-bullseye text-cyber-accent2"></i> Professional Goal
+                                </h3>
+                                <p class="text-cyber-muted leading-relaxed">
+                                    I am passionate about protecting digital assets, solving complex security challenges, and building innovative solutions that combine strong security practices with modern software development.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="glass-panel rounded-xl p-6 text-center hover:border-cyber-accent/40 transition-all hover:shadow-md">
+                                <i class="fas fa-shield-virus text-4xl text-cyber-accent mb-3"></i>
+                                <h4 class="font-bold text-cyber-text mb-1">3+ Years</h4>
+                                <p class="text-sm text-cyber-muted">Experience</p>
+                            </div>
+                            <div class="glass-panel rounded-xl p-6 text-center hover:border-cyber-accent2/40 transition-all hover:shadow-md">
+                                <i class="fas fa-bug text-4xl text-cyber-accent2 mb-3"></i>
+                                <h4 class="font-bold text-cyber-text mb-1">50+</h4>
+                                <p class="text-sm text-cyber-muted">Vulnerabilities Found</p>
+                            </div>
+                            <div class="glass-panel rounded-xl p-6 text-center hover:border-cyber-accent3/40 transition-all hover:shadow-md">
+                                <i class="fas fa-code text-4xl text-cyber-accent3 mb-3"></i>
+                                <h4 class="font-bold text-cyber-text mb-1">10+</h4>
+                                <p class="text-sm text-cyber-muted">Projects Built</p>
+                            </div>
+                            <div class="glass-panel rounded-xl p-6 text-center hover:border-cyber-accent/40 transition-all hover:shadow-md">
+                                <i class="fas fa-certificate text-4xl text-cyber-accent mb-3"></i>
+                                <h4 class="font-bold text-cyber-text mb-1">Certified</h4>
+                                <p class="text-sm text-cyber-muted">Professional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-cyber-accent/30"></div>
+                        <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-cyber-text">TECHNICAL <span class="text-cyber-accent">EXPERTISE</span></h2>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-cyber-accent/30"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Cybersecurity Skills -->
+                        <div class="glass-panel rounded-2xl p-8">
+                            <h3 class="text-xl font-bold text-cyber-text mb-6 font-orbitron flex items-center gap-3">
+                                <i class="fas fa-shield-halved text-cyber-accent"></i>
+                                Cybersecurity Operations
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Penetration Testing</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Ethical Hacking</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Vulnerability Assessment</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Network Security</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Web Application Security</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">SQL Injection Testing</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">XSS Analysis</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 text-cyber-accent text-sm font-medium">Security Auditing</span>
+                            </div>
+                        </div>
+
+                        <!-- Programming Skills -->
+                        <div class="glass-panel rounded-2xl p-8">
+                            <h3 class="text-xl font-bold text-cyber-text mb-6 font-orbitron flex items-center gap-3">
+                                <i class="fas fa-code text-cyber-accent2"></i>
+                                Programming & Development
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">HTML5</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">CSS3</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">JavaScript</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">React</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">Python</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">Java</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">C++</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">PHP</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">MySQL</span>
+                                <span class="skill-tag px-4 py-2 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 text-cyber-accent2 text-sm font-medium">Node.js</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skill Bars -->
+                    <div class="mt-8 glass-panel rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-cyber-text mb-6 font-orbitron">Proficiency Levels</h3>
+                        <div class="space-y-5">
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-cyber-text">Penetration Testing</span>
+                                    <span class="text-sm text-cyber-accent font-semibold">95%</span>
+                                </div>
+                                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-accent to-emerald-400 rounded-full" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-cyber-text">Web Development</span>
+                                    <span class="text-sm text-cyber-accent font-semibold">90%</span>
+                                </div>
+                                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-accent to-emerald-400 rounded-full" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-cyber-text">Network Security</span>
+                                    <span class="text-sm text-cyber-accent font-semibold">88%</span>
+                                </div>
+                                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-accent to-emerald-400 rounded-full" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-2">
+                                    <span class="text-sm font-medium text-cyber-text">Python Development</span>
+                                    <span class="text-sm text-cyber-accent font-semibold">85%</span>
+                                </div>
+                                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                                    <div class="h-full bg-gradient-to-r from-cyber-accent to-emerald-400 rounded-full" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-cyber-accent/30"></div>
+                        <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-cyber-text">FEATURED <span class="text-cyber-accent">PROJECTS</span></h2>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-cyber-accent/30"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Project 1 -->
+                        <div class="project-card glass-panel rounded-2xl overflow-hidden border border-cyber-border">
+                            <div class="h-48 bg-gradient-to-br from-cyber-accent/10 to-emerald-100 flex items-center justify-center relative overflow-hidden">
+                                <i class="fas fa-bug-slash text-6xl text-cyber-accent/30"></i>
+                                <div class="absolute top-4 right-4 px-3 py-1 bg-cyber-accent/10 border border-cyber-accent/30 rounded-full text-xs text-cyber-accent font-bold">COMPLETED</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-cyber-text mb-2 font-orbitron">Web Vulnerability Tester</h3>
+                                <p class="text-cyber-muted text-sm mb-4 leading-relaxed">
+                                    Developed a Web Vulnerability Tester designed to detect and analyze security weaknesses in web applications and servers. Identifies SQL Injection, XSS, insecure configurations, open ports, and authentication flaws.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent border border-cyber-accent/10">Python</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent border border-cyber-accent/10">Security</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent border border-cyber-accent/10">Automation</span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="flex-1 py-2 bg-cyber-accent/10 border border-cyber-accent/30 rounded-lg text-cyber-accent text-sm font-medium hover:bg-cyber-accent/20 transition-all">
+                                        <i class="fas fa-eye mr-1"></i> Demo
+                                    </button>
+                                    <button class="flex-1 py-2 bg-slate-100 border border-slate-200 rounded-lg text-cyber-muted text-sm font-medium hover:text-cyber-text transition-all">
+                                        <i class="fab fa-github mr-1"></i> Code
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 2 -->
+                        <div class="project-card glass-panel rounded-2xl overflow-hidden border border-cyber-border">
+                            <div class="h-48 bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center relative overflow-hidden">
+                                <i class="fas fa-fire-flame-simple text-6xl text-cyber-accent2/30"></i>
+                                <div class="absolute top-4 right-4 px-3 py-1 bg-cyber-accent2/10 border border-cyber-accent2/30 rounded-full text-xs text-cyber-accent2 font-bold">IN DEV</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-cyber-text mb-2 font-orbitron">PHAI Gas Company Website</h3>
+                                <p class="text-cyber-muted text-sm mb-4 leading-relaxed">
+                                    Currently building a professional corporate website for PHAI Gas Company. Focused on creating a modern, responsive, and user-friendly platform to enhance online presence and improve customer engagement.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent2 border border-cyber-accent2/10">React</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent2 border border-cyber-accent2/10">Tailwind</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent2 border border-cyber-accent2/10">Node.js</span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="flex-1 py-2 bg-cyber-accent2/10 border border-cyber-accent2/30 rounded-lg text-cyber-accent2 text-sm font-medium hover:bg-cyber-accent2/20 transition-all">
+                                        <i class="fas fa-eye mr-1"></i> Preview
+                                    </button>
+                                    <button class="flex-1 py-2 bg-slate-100 border border-slate-200 rounded-lg text-cyber-muted text-sm font-medium hover:text-cyber-text transition-all">
+                                        <i class="fas fa-lock mr-1"></i> Private
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project 3 -->
+                        <div class="project-card glass-panel rounded-2xl overflow-hidden border border-cyber-border">
+                            <div class="h-48 bg-gradient-to-br from-red-50 to-orange-50 flex items-center justify-center relative overflow-hidden">
+                                <i class="fas fa-project-diagram text-6xl text-cyber-accent3/30"></i>
+                                <div class="absolute top-4 right-4 px-3 py-1 bg-cyber-accent3/10 border border-cyber-accent3/30 rounded-full text-xs text-cyber-accent3 font-bold">IN PROGRESS</div>
+                            </div>
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold text-cyber-text mb-2 font-orbitron">PHAI Project</h3>
+                                <p class="text-cyber-muted text-sm mb-4 leading-relaxed">
+                                    Actively involved in the development of the PHAI project, contributing to web-based solutions and system design. The goal is to deliver a secure and scalable platform aligned with organizational needs.
+                                </p>
+                                <div class="flex flex-wrap gap-2 mb-4">
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent3 border border-cyber-accent3/10">Full-Stack</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent3 border border-cyber-accent3/10">Security</span>
+                                    <span class="px-2 py-1 bg-slate-100 rounded text-xs text-cyber-accent3 border border-cyber-accent3/10">Scalable</span>
+                                </div>
+                                <div class="flex gap-3">
+                                    <button class="flex-1 py-2 bg-cyber-accent3/10 border border-cyber-accent3/30 rounded-lg text-cyber-accent3 text-sm font-medium hover:bg-cyber-accent3/20 transition-all">
+                                        <i class="fas fa-info-circle mr-1"></i> Details
+                                    </button>
+                                    <button class="flex-1 py-2 bg-slate-100 border border-slate-200 rounded-lg text-cyber-muted text-sm font-medium hover:text-cyber-text transition-all">
+                                        <i class="fas fa-lock mr-1"></i> Private
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-cyber-accent/30"></div>
+                        <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-cyber-text">PHOTO <span class="text-cyber-accent">GALLERY</span></h2>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-cyber-accent/30"></div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-user text-4xl text-cyber-accent/40 group-hover:text-cyber-accent transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Profile Photo 1</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-user-tie text-4xl text-cyber-accent2/40 group-hover:text-cyber-accent2 transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Professional Shot</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-laptop-code text-4xl text-cyber-accent3/40 group-hover:text-cyber-accent3 transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">At Work</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-camera text-4xl text-cyber-accent/40 group-hover:text-cyber-accent transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Casual Photo</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-award text-4xl text-cyber-accent2/40 group-hover:text-cyber-accent2 transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Certifications</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-users text-4xl text-cyber-accent3/40 group-hover:text-cyber-accent3 transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Team Photo</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-server text-4xl text-cyber-accent/40 group-hover:text-cyber-accent transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Workspace</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Add your photo here</span>
+                            </div>
+                        </div>
+
+                        <div class="gallery-item rounded-xl aspect-square glass-panel border border-cyber-border cursor-pointer group">
+                            <div class="w-full h-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
+                                <div class="text-center">
+                                    <i class="fas fa-plus text-4xl text-cyber-muted/40 group-hover:text-cyber-accent transition-colors mb-2"></i>
+                                    <p class="text-xs text-cyber-muted">Add More</p>
+                                </div>
+                            </div>
+                            <div class="gallery-overlay">
+                                <span class="text-white text-sm font-medium">Click to add</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="text-center text-cyber-muted text-sm mt-6">
+                        <i class="fas fa-info-circle mr-1"></i> 
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-12">
+                        <div class="h-px flex-1 bg-gradient-to-r from-transparent to-cyber-accent/30"></div>
+                        <h2 class="font-orbitron text-3xl md:text-4xl font-bold text-cyber-text">GET IN <span class="text-cyber-accent">TOUCH</span></h2>
+                        <div class="h-px flex-1 bg-gradient-to-l from-transparent to-cyber-accent/30"></div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div class="space-y-6">
+                            <div class="glass-panel rounded-2xl p-8">
+                                <h3 class="text-2xl font-bold text-cyber-text mb-6 font-orbitron">Contact Information</h3>
+
+                                <div class="space-y-5">
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-location-dot text-cyber-accent"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-cyber-text font-semibold mb-1">Address</h4>
+                                            <p class="text-cyber-muted text-sm">Lagos, Nigeria</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-cyber-accent2/10 border border-cyber-accent2/20 flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-envelope text-cyber-accent2"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-cyber-text font-semibold mb-1">Email</h4>
+                                            <p class="text-cyber-muted text-sm">idrisbright12@gmail.com</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-cyber-accent3/10 border border-cyber-accent3/20 flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-phone text-cyber-accent3"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-cyber-text font-semibold mb-1">Phone</h4>
+                                            <p class="text-cyber-muted text-sm">09066248824</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="flex items-start gap-4">
+                                        <div class="w-12 h-12 rounded-lg bg-cyber-accent/10 border border-cyber-accent/20 flex items-center justify-center flex-shrink-0">
+                                            <i class="fas fa-clock text-cyber-accent"></i>
+                                        </div>
+                                        <div>
+                                            <h4 class="text-cyber-text font-semibold mb-1">Availability</h4>
+                                            <p class="text-cyber-muted text-sm">Open to freelance & full-time opportunities</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-panel rounded-2xl p-8">
+                                <h3 class="text-xl font-bold text-cyber-text mb-4 font-orbitron">Follow Me</h3>
+                                <div class="flex gap-4">
+                                    <a href="#" class="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent transition-all">
+                                        <i class="fab fa-github text-xl"></i>
+                                    </a>
+                                    <a href="#" class="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent transition-all">
+                                        <i class="fab fa-linkedin text-xl"></i>
+                                    </a>
+                                    <a href="#" class="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent transition-all">
+                                        <i class="fab fa-twitter text-xl"></i>
+                                    </a>
+                                    <a href="#" class="w-12 h-12 rounded-lg bg-slate-100 border border-slate-200 flex items-center justify-center text-cyber-muted hover:text-cyber-accent hover:border-cyber-accent transition-all">
+                                        <i class="fab fa-instagram text-xl"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-panel rounded-2xl p-8">
+                            <h3 class="text-2xl font-bold text-cyber-text mb-6 font-orbitron">Send a Message</h3>
+
+                            <!-- Success Message -->
+                            <div id="form-success" class="form-status mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-check-circle text-emerald-600 text-xl"></i>
+                                    <div>
+                                        <p class="font-semibold text-emerald-800">Message Sent!</p>
+                                        <p class="text-sm text-emerald-600">Thank you for reaching out. I'll get back to you soon.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Error Message -->
+                            <div id="form-error" class="form-status mb-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
+                                    <div>
+                                        <p class="font-semibold text-red-800">Oops!</p>
+                                        <p class="text-sm text-red-600">Something went wrong. Please try again.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <form id="contact-form" action="https://formspree.io/f/mbdwrjeg" method="POST" class="space-y-5">
+                                <div>
+                                    <label class="block text-sm font-medium text-cyber-muted mb-2">Your Name</label>
+                                    <input type="text" name="name" required 
+                                        class="form-input w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-cyber-text placeholder-slate-400 focus:outline-none transition-all" 
+                                        placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-cyber-muted mb-2">Your Email</label>
+                                    <input type="email" name="email" required 
+                                        class="form-input w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-cyber-text placeholder-slate-400 focus:outline-none transition-all" 
+                                        placeholder="john@example.com">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-cyber-muted mb-2">Subject</label>
+                                    <select name="subject" required 
+                                        class="form-input w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-cyber-text focus:outline-none transition-all">
+                                        <option value="">Select a subject...</option>
+                                        <option value="Project Inquiry">Project Inquiry</option>
+                                        <option value="Security Audit">Security Audit</option>
+                                        <option value="Job Opportunity">Job Opportunity</option>
+                                        <option value="Collaboration">Collaboration</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-cyber-muted mb-2">Message</label>
+                                    <textarea name="message" rows="4" required 
+                                        class="form-input w-full px-4 py-3 bg-white border border-slate-200 rounded-lg text-cyber-text placeholder-slate-400 focus:outline-none transition-all resize-none" 
+                                        placeholder="Tell me about your project..."></textarea>
+                                </div>
+
+                                <!-- Hidden fields for Formspree -->
+                                <input type="hidden" name="_subject" value="New message from Portfolio - Idris Haji Bright">
+                                <input type="hidden" name="_replyto" value="%email">
+
+                                <button type="submit" id="submit-btn" class="w-full py-3 bg-cyber-accent text-white font-bold rounded-lg hover:bg-emerald-700 transition-all hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed">
+                                    <i class="fas fa-paper-plane" id="btn-icon"></i>
+                                    <span id="btn-text">Send Message</span>
+                                </button>
+                            </form>
+
+                            <div class="mt-4 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                                <p class="text-xs text-amber-800">
+                                    <i class="fas fa-info-circle mr-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 py-8 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-2">
+                        <i class="fas fa-shield-halved text-cyber-accent"></i>
+                        <span class="font-orbitron font-bold text-cyber-text">IDRIS HAJI BRIGHT</span>
+                    </div>
+                    <p class="text-cyber-muted text-sm">
+                        Cybersecurity Specialist | Penetration Tester | Ethical Hacker | Full-Stack Developer
+                    </p>
+                    <p class="text-cyber-muted text-sm">
+                        &copy; 2026 All Rights Reserved.
+                    </p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Matrix Rain Effect (subtle on white)
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let i = 0; i < columns; i++) {
+            drops[i] = Math.random() * -100;
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(248, 250, 252, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#059669';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Typing Effect
+        const text = "Cybersecurity Specialist | Penetration Tester | Ethical Hacker | Full-Stack Developer";
+        const typingElement = document.getElementById('typing-text');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                typingElement.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50);
+            }
+        }
+
+        setTimeout(typeWriter, 500);
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        });
+
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar background on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+            } else {
+                nav.style.background = 'rgba(255, 255, 255, 0.9)';
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Contact Form Handling
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const btnText = document.getElementById('btn-text');
+        const btnIcon = document.getElementById('btn-icon');
+        const successMsg = document.getElementById('form-success');
+        const errorMsg = document.getElementById('form-error');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Check if Formspree ID has been updated
+            const formAction = contactForm.getAttribute('action');
+            if (formAction.includes('YOUR_FORM_ID')) {
+                alert('Please set up your Formspree form ID first!\n\n1. Go to https://formspree.io/register\n2. Create a new form\n3. Copy your form ID\n4. Replace YOUR_FORM_ID in the HTML');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.textContent = 'Sending...';
+            btnIcon.className = 'fas fa-spinner fa-spin';
+
+            try {
+                const response = await fetch(formAction, {
+                    method: 'POST',
+                    body: new FormData(contactForm),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    // Show success
+                    successMsg.classList.add('show');
+                    errorMsg.classList.remove('show');
+                    contactForm.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                // Show error
+                errorMsg.classList.add('show');
+                successMsg.classList.remove('show');
+            } finally {
+                // Reset button
+                submitBtn.disabled = false;
+                btnText.textContent = 'Send Message';
+                btnIcon.className = 'fas fa-paper-plane';
+            }
+        });
+    </script>
+</body>
+</html>
